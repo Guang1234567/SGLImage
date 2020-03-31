@@ -21,7 +21,7 @@
 
 
 import Foundation
-#if os(Linux)
+#if os(Linux) || os(Android)
     import Glibc
 #else
     import Darwin.C
@@ -116,7 +116,7 @@ public class SGLImage<T> : SGLImageType {
     }
 
     deinit {
-        buffer.baseAddress!.deallocate(capacity: buffer.count)
+        buffer.baseAddress!.deallocate(/*capacity: buffer.count*/)
     }
 
     public func withUnsafeMutableBufferPointer(body: (UnsafeMutableBufferPointer<T>) throws -> Void) rethrows {
